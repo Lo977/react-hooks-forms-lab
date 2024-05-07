@@ -7,15 +7,15 @@ function ShoppingList({ items, onItemFormSubmit }) {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [search, setSearch] = useState("");
 
-  function handleCategoryChange(event) {
-    setSelectedCategory(event.target.value);
-  }
-
   const itemsToDisplay = items
     .filter(
       (item) => selectedCategory === "All" || item.category === selectedCategory
     )
     .filter((item) => item.name.toLowerCase().includes(search.toLowerCase()));
+
+  function handleCategoryChange(event) {
+    setSelectedCategory(event.target.value);
+  }
 
   return (
     <div className="ShoppingList">
@@ -23,8 +23,8 @@ function ShoppingList({ items, onItemFormSubmit }) {
       <Filter
         onCategoryChange={handleCategoryChange}
         search={search}
-        selectedCategory={selectedCategory}
         onSearchChange={setSearch}
+        selectedCategory={selectedCategory}
       />
       <ul className="Items">
         {itemsToDisplay.map((item) => (
